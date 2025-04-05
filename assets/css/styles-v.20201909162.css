@@ -1,0 +1,297 @@
+body {
+    padding: 0;
+    margin: 0;
+    border: 0;
+}
+
+p, h4 {
+    font-family: 'Dosis', sans-serif;
+}
+
+.background {
+    display: block;
+    width: 100%;
+    background-image: linear-gradient(#03011f, #0f096d);
+    height: 35vh;
+}
+
+.container {
+    background: #eaeaeaf7;
+}
+
+.profile {
+    position: absolute;
+    top: 0;
+    background: #FFFFFF;
+    width: 96%;
+    border-radius: 10px;
+    margin-left: 2%;
+    margin-top: 41%;
+    margin-right: 2%;
+    height: 31vh;
+    box-shadow: 1px 9px 20px 0px #35323257;;
+}
+
+.profile-avatar {
+    position: absolute;
+    top: -66px;
+    left: 29%;
+    text-align: center;
+}
+.profile-avatar img {
+    border-radius: 50%;
+    width: 81%;
+    box-shadow: -1px 1px 14px 0px #35323257;
+}
+
+.skills {
+    height: 14vh;
+}
+
+.profile-desc {
+    text-align: center;
+    display: block;
+    margin-top: 9vh;
+}
+
+.profile-desc p {
+    margin: 0;
+}
+
+.profile-desc .text-principal {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.profile-desc .adress {
+    font-size: 1.3rem;
+}
+
+.profile-social a {
+    text-decoration: none;
+    font-size: 2rem;
+    color: #0f096d;
+    margin: 20px;
+}
+
+.profile-social {
+    text-align: center;
+    bottom: 3vh;
+    position: absolute;
+    left: 8%;
+
+}
+
+.projects {
+    height: 42vh;
+    padding: 1vh;
+    display: flex;
+    width: 534px;
+}
+
+.projects .projects-box {
+    /* width: 40%; */
+    background: #fff;
+    border-radius: 7px;
+    margin: 5px;
+    height: 38vh;
+    position: relative;
+}
+
+.projects .projects-box img{
+    width: 100%;
+    border-radius: 7px 7px 0px 0px;
+}
+
+.projects .projects-box .projects-text{
+    padding: 5%;
+    margin-top: -2vh;
+}
+
+.projects .projects-box .projects-text .text {
+    font-size: 0.8rem;
+    margin-top: -1vh;
+}
+
+.projects .projects-box a {
+    position: absolute;
+    bottom: 5%;
+    left: 25%;
+}
+
+.text-bold {
+    font-weight: bold;
+}
+
+em {
+    display: inline-block;
+    background: #262626;
+    width: 2px;
+    height: 5vh;
+    margin-left: 3vh;
+    margin-right: 3vh;
+    margin-top: 1px;
+}
+
+.btn {
+    text-decoration: none;
+    padding: 5px;
+    width: 9vh;
+    display: block;
+    border-radius: 25px;
+    text-align: center;
+    margin: auto;
+    font-family: 'Dosis', sans-serif;
+
+}
+
+.btn-primary {
+    background-image: linear-gradient(to right,#03011f, #0f096d);
+    color: #fff;
+
+}
+
+.title {
+    margin-top: 22vh;
+    margin-left: 1vh;
+    font-size: 1.7rem;
+}
+
+.title h4 {
+    font-family: 'Dosis', sans-serif;
+    font-weight: bold;
+    margin: 0;
+}
+
+.skills .title, .experience .title {
+    margin-top: 0px;
+}
+
+.skills-img img {
+   width: 6vh;
+}
+
+.skills-img {
+  text-align: center;
+}
+
+.experience-content {
+    margin-bottom: 10px;
+}
+
+.experience h4 span {
+    font-size: 0.7rem;
+}
+
+.experience  .experience-title{
+    background: #fff;
+    width: 95%;
+    box-shadow: 1px 9px 20px 0px #35323257;
+    margin: auto;
+    padding: 8px 5px 10px 5px;
+    height: 5vh;
+}
+
+.experience-title h4, .experience-title p {
+    margin: 0;
+}
+
+.experience-title p {
+    font-size: 0.8rem;
+}
+
+.experience .title {
+    text-align: left;
+}
+
+.experience-text {
+    background: #fff;
+    color: #5f5f5f;
+    width: 95%;
+    height: 0;
+    box-shadow: 1px 9px 20px 0px #35323257;
+    margin: auto;
+    padding: 1px 5px 10px 5px;
+    text-align: justify;
+    border-top: 1px solid #cacaca;
+    display: none;
+    transition: 0.8s;
+}
+
+.arrow-icon {
+    margin-top: -7%;
+    display: block;
+    margin-left: 95%;
+    transition: 0.3s;
+}
+
+.h-100 {
+    height: 100% !important;
+}
+
+.accordion {
+    background-color: #fff;
+    color: #444;
+    cursor: pointer;
+    padding: 10px;
+    font-size: 1.1rem;
+    margin: 2%;
+    width: 95%;
+    border: none;
+    text-align: left;
+    outline: none;
+    transition: 0.3s;
+    border-radius: 5px;
+}
+
+.accordion.active {
+    margin-bottom: 0;
+    border-radius: 5px 5px 0px 0px;
+}
+.accordion-title {
+    width: 95%;
+    margin: 0;
+    display: inherit;
+    color: rgb(0, 0, 0);
+}
+.accordion-title h4, .accordion-title p {
+    margin: 0;
+    color: rgb(0, 0, 0);
+}
+.accordion::after{
+    content: "\f054";
+    float: right;
+    font: normal normal normal 14px/1 FontAwesome;
+    margin-top: 4%;
+    margin-right: 1%;
+}
+.active::after{
+    transform: rotate(90deg);
+}
+.panel{
+    padding: 0 10px;
+    background-color: white;
+    max-height: 0;
+    transition: max-height 0.5s;
+    overflow: hidden;
+    width: 90%;
+    margin: 2%;
+    margin-top: 0;
+    display: inherit;
+    text-align: left;
+    color: rgb(0, 0, 0);
+    border-radius: 0px 0px 5px 5px;
+}
+
+.footer {
+    color: #ebebeb;
+    background: #0f096d;
+    font-size: 1.1rem;
+    text-align: center;
+    padding: 10px;
+    margin-top: 10%;
+}
+
+.footer h4, .footer p {
+    margin: 0;
+}
