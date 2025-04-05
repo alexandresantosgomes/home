@@ -1,5 +1,3 @@
----
-
 # Portfólio • Alexandre Santos Gomes
 
 Este repositório contém o código do meu portfólio pessoal, onde apresento alguns dos projetos que desenvolvi, destacando sistemas web, interfaces responsivas e aplicações completas com foco em usabilidade e performance.
@@ -36,5 +34,3 @@ No portfólio você encontrará:
 
 Se você gostou dos projetos ou quer criar algo novo, o próximo projeto pode ser o seu!  
 📬 alexandresantosgomes@gmail.com
-
----
