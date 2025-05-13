@@ -155,6 +155,10 @@ $(".contact__input").on('focusout', function(){
     $(this).parents('.contact__content').removeClass('focus');
 });
 
+(function() {
+    emailjs.init("nPF_CX2eKLsb6hms1");
+})();
+
 $("#sendForm").on('click', function(e) {
     e.preventDefault();
     var formValidate = true;
@@ -181,20 +185,76 @@ $("#sendForm").on('click', function(e) {
     var btn = Ladda.create(this, {style: "zoom-out"});
     btn.start();
 
-    $.ajax({
-        type: "POST",
-        url: "https://formsubmit.co/santosalexandregomes@gmail.com",
-        data: $("#formContact").serialize(),
-        success: function() {
+    const formData = $("#formContact").serializeArray();
+    const dados = {};
+    $.each(formData, function(_, field) {
+        dados[field.name] = field.value;
+    });
+
+    const emailTemplate = `
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+            <h2 style="color: #333;">Novo Contato Recebido</h2>
+            
+            <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px;">
+                <tr>
+                    <td style="padding: 10px; border: 1px solid #ddd; background-color: #f5f5f5; width: 30%;">
+                        <strong>Nome:</strong>
+                    </td>
+                    <td style="padding: 10px; border: 1px solid #ddd;">
+                        ${dados.str_nome || 'Não informado'}
+                    </td>
+                </tr>
+                <tr>
+                    <td style="padding: 10px; border: 1px solid #ddd; background-color: #f5f5f5;">
+                        <strong>E-mail:</strong>
+                    </td>
+                    <td style="padding: 10px; border: 1px solid #ddd;">
+                        ${dados.str_email || 'Não informado'}
+                    </td>
+                </tr>
+                <tr>
+                    <td style="padding: 10px; border: 1px solid #ddd; background-color: #f5f5f5;">
+                        <strong>Telefone:</strong>
+                    </td>
+                    <td style="padding: 10px; border: 1px solid #ddd;">
+                        ${dados.str_telefone || 'Não informado'}
+                    </td>
+                </tr>
+                <tr>
+                    <td style="padding: 10px; border: 1px solid #ddd; background-color: #f5f5f5;">
+                        <strong>Mensagem:</strong>
+                    </td>
+                    <td style="padding: 10px; border: 1px solid #ddd;">
+                        ${dados.str_mensagem || 'Não informada'}
+                    </td>
+                </tr>
+            </table>
+            
+            <p style="color: #666; font-size: 0.9em;">
+                Mensagem enviada em ${new Date().toLocaleString()}
+            </p>
+        </div>
+    `;
+
+    const params = {
+        title: "Novo Contato",
+        to_name: "Alexandre Santos",
+        email_content: emailTemplate,
+        reply_to: $('str_email').val(),
+    };
+
+    emailjs.send("service_gfmi2ur", "template_ruo7m39", params)
+        .then(function(response) {
             Swal.fire({
                 title: "Contato Enviado Com Sucesso!",
-                text: "Em breve irei entrar em contato com você.",
+                text: "Em breve entrarei em contato com você.",
                 icon: "success",
                 draggable: true,
                 theme: localStorage.getItem('selected-theme'),
             });
-        },
-        error: function() {
+            btn.stop();
+            $("#formContact").trigger("reset");
+        }, function(error) {
             Swal.fire({
                 title: "Erro ao Enviar Contato!",
                 text: "Tente Novamente.",
@@ -202,11 +262,94 @@ $("#sendForm").on('click', function(e) {
                 draggable: true,
                 theme: localStorage.getItem('selected-theme'),
             });
-        },
-        complete: function() {
             btn.stop();
-        }
-    });
+        });
+});
+
+function enviarNotificacaoAcesso() {
+    const jaEnviado = localStorage.getItem('notificacaoAcessoEnviada') || sessionStorage.getItem('notificacaoAcessoEnviada');
+    
+    if (jaEnviado) {
+        return;
+    }
+
+    const dadosAcesso = {
+        dataHora: new Date().toLocaleString(),
+        pagina: window.location.href,
+        userAgent: navigator.userAgent,
+        larguraTela: window.screen.width,
+        alturaTela: window.screen.height,
+        idioma: navigator.language,
+        timezone: Intl.DateTimeFormat().resolvedOptions().timeZone
+    };
+
+    const emailTemplate = `
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+            <h2 style="color: #333;">Novo Acesso ao Site</h2>
+            
+            <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px;">
+                <tr>
+                    <td style="padding: 10px; border: 1px solid #ddd; background-color: #f5f5f5; width: 30%;">
+                        <strong>Data/Hora:</strong>
+                    </td>
+                    <td style="padding: 10px; border: 1px solid #ddd;">
+                        ${dadosAcesso.dataHora}
+                    </td>
+                </tr>
+                <tr>
+                    <td style="padding: 10px; border: 1px solid #ddd; background-color: #f5f5f5;">
+                        <strong>Página Acessada:</strong>
+                    </td>
+                    <td style="padding: 10px; border: 1px solid #ddd;">
+                        ${dadosAcesso.pagina}
+                    </td>
+                </tr>
+                <tr>
+                    <td style="padding: 10px; border: 1px solid #ddd; background-color: #f5f5f5;">
+                        <strong>Dispositivo:</strong>
+                    </td>
+                    <td style="padding: 10px; border: 1px solid #ddd;">
+                        ${dadosAcesso.userAgent}
+                    </td>
+                </tr>
+                <tr>
+                    <td style="padding: 10px; border: 1px solid #ddd; background-color: #f5f5f5;">
+                        <strong>Resolução:</strong>
+                    </td>
+                    <td style="padding: 10px; border: 1px solid #ddd;">
+                        ${dadosAcesso.larguraTela} × ${dadosAcesso.alturaTela} pixels
+                    </td>
+                </tr>
+                <tr>
+                    <td style="padding: 10px; border: 1px solid #ddd; background-color: #f5f5f5;">
+                        <strong>Idioma/Região:</strong>
+                    </td>
+                    <td style="padding: 10px; border: 1px solid #ddd;">
+                        ${dadosAcesso.idioma} (${dadosAcesso.timezone})
+                    </td>
+                </tr>
+            </table>
+        </div>
+    `;
+
+    const params = {
+        title: "Novo Acesso ao Site",
+        to_name: "Alexandre Santos",
+        email_content: emailTemplate,
+        subject: `Novo acesso ao site - ${new Date().toLocaleDateString()}`
+    };
+
+    emailjs.send("service_gfmi2ur", "template_ruo7m39", params)
+        .then(function(response) {
+            sessionStorage.setItem('notificacaoAcessoEnviada', 'true');
+            localStorage.setItem('notificacaoAcessoEnviada', 'true');
+        })
+        .catch(function(error) {
+            console.error('Erro ao enviar notificação de acesso:', error);
+        });
+}
+$(document).ready(function() {
+    setTimeout(enviarNotificacaoAcesso, 3000);
 });
 
 var MaskBehavior = function(val) {
