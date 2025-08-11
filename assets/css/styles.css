@@ -523,8 +523,16 @@ img {
     width: 90%;
 }
 
+.w-80 {
+    width: 80%;
+}
+
 .w-70 {
     width: 70%;
+}
+
+.w-60 {
+    width: 60%;
 }
 
 .w-50 {
@@ -1130,4 +1138,5 @@ img {
 .ladda-button[disabled], .ladda-button[disabled]:hover, .ladda-button[data-loading], .ladda-button[data-loading]:hover {
     background-color: var(--first-color);
     opacity: .6;
+
 }
